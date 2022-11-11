@@ -47,3 +47,7 @@ const bar = foo.call(obj1);
 console.log(bar());
 
 ```
+
+
+## Var
+
