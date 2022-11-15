@@ -88,12 +88,12 @@ function generateSessionEvents(commonData, session) {
       eventTypeCode: 'OlympicsSession',
       eventBody: {
         code: session['$']['SessionCode'],
-        sessionName: session['SessionName']
+        SessionName: session['SessionName']
           ? session['SessionName'][0]['$']['Value']
           : undefined,
-        startDate: session['$']['StartDate'],
+        startDateTime: session['$']['StartDate'],
         endDate: session['$']['EndDate'],
-        sessionType: session['$']['SessionType'],
+        SessionType: session['$']['SessionType'],
         competition: {
           code: commonData.competitionCode,
           documentCode: commonData.documentCode,
@@ -101,7 +101,7 @@ function generateSessionEvents(commonData, session) {
       },
       eventLocation: {
         venue: session['$']['Venue'],
-        venueName: session['$']['VenueName'],
+        VenueName: session['$']['VenueName'],
       },
       startDate: session['$']['StartDate'],
       endDate: session['$']['EndDate'],
@@ -110,7 +110,7 @@ function generateSessionEvents(commonData, session) {
       sessionEventBody.eventBody.sportType = sportType;
     }
     if (session['$']['Medal']) {
-      sessionEventBody.eventBody.medal = session['$']['Medal'];
+      sessionEventBody.eventBody.Medal = session['$']['Medal'];
     }
     sessionEvents.push(sessionEventBody);
   });
@@ -139,8 +139,6 @@ function generateUnitEvents(commonData, units) {
         code: unit['$']['Code'],
         phaseType: unit['$']['PhaseType'],
         sessionCode: unit['$']['SessionCode'],
-        startDate: unit['$']['StartDate'],
-        endDate: unit['$']['EndDate'],
         eventStatus: {
           name: unit['$']['ScheduleStatus'],
         },
@@ -150,10 +148,10 @@ function generateUnitEvents(commonData, units) {
         },
       },
       eventLocation: {
-        venueName: unit['VenueDescription']
+        VenueName: unit['VenueDescription']
           ? unit['VenueDescription'][0]['$']['VenueName']
           : undefined,
-        locationName: unit['VenueDescription']
+        LocationName: unit['VenueDescription']
           ? unit['VenueDescription'][0]['$']['VenueName']
           : undefined,
       },
@@ -179,26 +177,18 @@ function generateUnitEvents(commonData, units) {
       unitEventBody.eventBody.eventName =
       `${unit['ItemName'][0]['$']['Value']} - ${eventStage}`;
     }
-    if (unit['$']['ScheduleStatus'] === 'RESCHEDULED') {
-      unitEventBody.eventBody.endDate = unit['$']['ActualEndDate'];
-      unitEventBody.endDate = unit['$']['ActualEndDate'];
-    } else if (
+    if (
       unit['$']['ScheduleStatus'] !== 'UNSCHEDULED' &&
       unit['$']['ScheduleStatus'] !== 'CANCELLED'
     ) {
       unitEventBody.eventBody.endDate = unit['$']['EndDate'];
-      unitEventBody.endDate = unit['$']['EndDate'];
     }
-    if (unit['$']['ScheduleStatus'] === 'RESCHEDULED') {
-      unitEventBody.eventBody.startDate = unit['$']['ActualStartDate'];
-      unitEventBody.startDate = unit['$']['ActualStartDate'];
-    } else if (
+   if (
       unit['$']['ScheduleStatus'] !== 'UNSCHEDULED' &&
       unit['$']['ScheduleStatus'] !== 'CANCELLED' &&
       unit['$']['ScheduleStatus'] !== 'POSTPONED'
     ) {
-      unitEventBody.eventBody.startDate = unit['$']['StartDate'];
-      unitEventBody.startDate = unit['$']['StartDate'];
+      unitEventBody.eventBody.startDateTime = unit['$']['StartDate'];
     }
     unitEvents.push(unitEventBody);
   });
