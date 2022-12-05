@@ -64,9 +64,9 @@
 // let n = 5;
 // console.log(n + (+("2" + n)) + (+("3" + n))); // 65
 
-let n = 6
-let num = String(n);
-n1 =  2 * num;
-n2 =  3 * num;
-number = n + n1 + n2;
-console.log(number);
+// let n = 6
+// let num = String(n);
+// n1 =  2 * num;
+// n2 =  3 * num;
+// number = n + n1 + n2;
+// console.log(number);
