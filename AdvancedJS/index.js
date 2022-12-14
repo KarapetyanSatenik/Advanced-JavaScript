@@ -1,9 +1,14 @@
-
-let value = 58;
-let sum = 0;
-
-while (value > 1) {
-    sum += value % 10;
-    value = Math.floor(value / 10);
+function foo(x, y){
+    console.log(this);
+    this.x = x
+    this.y = y
 }
-console.log(sum);
+
+foo.prototype.bin= function () {
+    function zoo() {
+        return this.x + "hello"
+    }
+  return  zoo.call(this)
+}
+let a =  new foo(1,2)
+console.log(a.bin());
