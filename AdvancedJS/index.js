@@ -1,14 +1,20 @@
-function foo(x, y){
-    console.log(this);
-    this.x = x
-    this.y = y
+class User {
+    constructor (name) {
+        this.name = name
+    }
 }
 
-foo.prototype.bin= function () {
-    function zoo() {
-        return this.x + "hello"
+class Person extends User{
+    constructor (name, age) {
+        super(name)
+        this.age = age
+        //console.log(this) // object
     }
-  return  zoo.call(this)
 }
-let a =  new foo(1,2)
-console.log(a.bin());
+
+let x = new Person("Sat", 23)
+console.log(x.__proto__ === Person.prototype); //true
+console.log(Person.__proto__ === User); //true
+console.log(Person.__proto__ === User.prototype); // false
+console.log(Person.prototype.__proto__ === User.prototype); //true
+console.log(Person.prototype.__proto__ === User); //false
